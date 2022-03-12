@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Phone Book App</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css" />
+        <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script> -->
+        <link rel = "stylesheet" href = "https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+
+        //The jQuery core JavaScript file
+        <script src = "https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+        //The jQuery Mobile core JavaScript file
+        <script src = "https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    </head>
+
+    <body>
+        <div id="homePage" data-role="page">
+            <section>
+                <div data-role="header">
+                    <h1> Contact List </h1>
+                    <a href="#addPage" data-transition="flip" data-role="button" data-icon="plus"> Add </a>
+                </div>
+
+                <div data-role="content">
+                    <div>
+                        <ul data-role="listview" data-inset="true" data-filter="true" data-autodividers="true">
+                            <li>
+                                <a href="#viewContactPage" data-transition="slidedown"> <img src="images/f.png"/> Thoraya Hamdy </a>
+                                <a href="#tel" data-role="button" data-icon="phone"> </a>
+                            </li>
+                            <li>
+                                <a href="#viewContactPage" data-transition="slidedown"> <img src="images/f.png"/> Hanan Syaed </a>
+                                <a href="#tel" data-role="button" data-icon="phone"> </a>
+                            </li>
+                            <li>
+                                <a href="#viewContactPage" data-transition="slidedown"> <img src="images/m1.png"/> Ahmed Hamdy </a>
+                                <a href="#tel" data-role="button" data-icon="phone"> </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div data-role="footer">
+                    <h1> Contact List </h1>
+                </div>
+            </section>
+        </div>
+
+        <div data-role="page" id="viewContactPage">
+            <section>
+                <header data-role="header" data-add-back-btn="true">
+                    <a href="#" data-rel="back" data-icon="back">Back</a>
+                    <h1>Thoraya Hamdy</h1>
+                </header>
+
+                <div data-role="content">
+                    <div data-role="controlgroup" data-type="vertical">
+                        <img src="images/f.png" width="120" height="120"/>
+                        <div data-role="controlgroup" data-type="horizontal">
+                            <a href="#deletePage" data-role="button" data-icon="delete" data-rel="dialog" data-inline="true"
+                               data-mini="true"> </a>
+                            <a href="#editPage" data-role="button" data-icon="pencil" > </a>
+                            <a href="#tel" data-role="button" data-icon="phone"> </a>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+
+                <div data-role="footer">
+                    <h1> Contact List </h1>
+                </div>
+            </section>
+        </div>
+
+        <div data-role="page" id="editPage">
+            <section>
+                <header data-role="header" data-add-back-btn="true">
+                    <h1>Edit Page</h1>
+                    <a href="#" data-rel="back" data-icon="back">Back</a>
+                </header>
+                <div data-role="content">
+                    <form>
+                        <table>
+                            <tr>
+                                <td> Name: </td>
+                                <td> <input type="text" value="Thoraya Hamdy" required> </td>
+                            </tr>
+                            <tr>
+                                <td> Phone: </td>
+                                <td> <input type="tel" pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$"
+                                            value="01150651427" required> </td>
+                            </tr>
+                            <tr>
+                                <td> Email: </td>
+                                <td> <input type="email" value="thoriahamdy743@gmail.com" required> </td>
+                            </tr>
+                            <tr>
+                                <td> <label for="gender">Gender:</label> </td>
+                                <td>
+                                    <fieldset>
+                                        <div data-role="fieldcontain">
+                                            <select id="gender" data-role="flipswitch">
+                                                <option value="male">male</option>
+                                                <option value="female">female</option>
+                                            </select>
+                                        </div>
+                                    </fieldset>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> <input type="submit" data-role="button" data-icon="check" value="Submit"> </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <div data-role="footer">
+                    <h1> Contact List </h1>
+                </div>
+            </section>
+        </div>
+
+        <div data-role="page" id="addPage">
+            <section>
+                <header data-role="header" data-add-back-btn="true">
+                    <h1>New Contact</h1>
+                    <a href="#" data-rel="back" data-icon="back">Back</a>
+                </header>
+                <div data-role="content">
+                    <form>
+                        <table>
+                            <tr>
+                                <td> Name: </td>
+                                <td> <input type="text" required> </td>
+                            </tr>
+                            <tr>
+                                <td> Phone: </td>
+                                <td> <input type="tel" pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$" required> </td>
+                            </tr>
+                            <tr>
+                                <td> Email: </td>
+                                <td> <input type="email" required> </td>
+                            </tr>
+                            <tr>
+                                <td> <label for="gender">Gender:</label> </td>
+                                <td>
+                                    <fieldset>
+                                        <div data-role="fieldcontain">
+                                            <select id="addgender" data-role="flipswitch">
+                                                <option value="male">male</option>
+                                                <option value="female">female</option>
+                                            </select>
+                                        </div>
+                                    </fieldset>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> <input type="submit" data-role="button" data-icon="check" value="Submit"> </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <div data-role="footer">
+                    <h1> Contact List </h1>
+                </div>
+            </section>
+        </div>
+    </body>
+</html>
