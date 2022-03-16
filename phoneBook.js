@@ -1,6 +1,9 @@
 function init(){
     displayContactList("#list");
 }
+var contacts = [];
+var contact = "";
+
 
 $(document).ready(function() {
     // Run the start-up routine, which, in this case, loads the current list of entries from
@@ -50,25 +53,26 @@ function backPressed(){
 }
 
 function setPhone(){
-    var c = getContactFromDisplayName(contact);
-    console.log(c.phone);
-    document.getElementById("tel").href="tel:" + c.phone;
+    if(contact !== null && contact !== ""){
+        var c = getContactFromDisplayName(contact);
+        console.log(c.phone);
+        document.getElementById("tel").href="tel:" + c.phone;
+    }
+
+
 }
 
 
-$(document).on('click', "#list a", function() {
+$(document).on('click', "#list a.a1", function() {
+    contact = $(this).find("span").text();
     console.log("item clicked");
-    contact = $(this).text();
-    //contact = $(this).document.getElementById("sp").innerText;
-    //contact = $(this).find("#sp").innerText;
     console.log(contact);
-//    var img = "";
-//    if($("#img"))
-//    ${#img}
-//    window.location.href = '#viewContactPage';
-    //var c = getContactFromDisplayName(contact);
-    //displayContact(c);
-    //contact = "";
+
+    console.log($(this).find("img").attr("src"));
+    $("#img").attr("src", $(this).find("img").attr("src"));
+    var c = getContactFromDisplayName(contact);
+    $("#gender").val(c.gender);
+
 });
 
 
@@ -77,10 +81,10 @@ var Contact = function(name, phone, email, gender) {
     this.phone = phone;
     this.email = email;
     this.gender = gender;
+
 }
 
-var contacts = [];
-var contact = "";
+
 
 function  addContact(name, phone, email, gender){
     var contact = new Contact(name, phone, email, gender);
@@ -120,8 +124,11 @@ function removeContact(name){
 function makeContactList(){
     var index, list = "";
     for(index = 0; index < contacts.length; index += 1){
-       list += "<li><a href='#viewContactPage'>" + contacts[index].name + "</a></li>"; // name='item'
-       //list += "<li><a href='#viewContactPage'> <img src='images/m1.png' width='120' height='120'/> <span id='sp'>" + contacts[index].name + "</span></a></li>"; // name='item'
+    console.log(contacts[index].gender);
+       //list += "<li><a href='#viewContactPage'>" + contacts[index].name + "</a></li>"; // name='item'
+       var img = contacts[index].gender == "male" ? "images/m1.png" : "images/f.png";
+       list += "<li><a class='a1' href='#viewContactPage'><img src='" + img + "'/><span>"  + contacts[index].name + "</span></a><a class='a2' href='tel:" + contacts[index].phone + "' data-role='button' data-icon='phone'> </a></li>";
+       //list += "<li><a href='#viewContactPage'> <img id = 'img" + index + "' src='" + img + "' width='120' height='120'/> <span id = 'span" + index + "'>" + contacts[index].name + "</span></a></li>"; // name='item'
 
     }
     return list;
@@ -166,15 +173,23 @@ function updateContact(){
  * @returns {*}
  */
 function addNewContact(){
-    var name = $("#name").val(),
-        phone = $("#phone").val(),
-        email = $("#email").val(),
-        gender = $("#gender").val();
-    if(name !== "") {
-        return addContact(name, phone, email, gender);
-    } else {
-        return null;
+    var c = getContactFromDisplayName($("#name").val());
+    if(c !== null && c.name !== ""){
+        console.log("user aready exist");
+        alert("user aready exist");
     }
+    else{
+        var name = $("#name").val(),
+            phone = $("#phone").val(),
+            email = $("#email").val(),
+            gender = $("#gender").val();
+        if(name !== "") {
+            return addContact(name, phone, email, gender);
+        } else {
+            return null;
+        }
+    }
+
 }
 
 function makeFormEmpty(){
